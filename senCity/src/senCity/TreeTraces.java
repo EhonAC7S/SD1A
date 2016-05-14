@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TreeTraces extends AbstractTraces {
-	public Node lettres;
+	private Node lettres;
 	
 	public TreeTraces() {
 		this.lettres = new Node();
@@ -38,7 +38,6 @@ public class TreeTraces extends AbstractTraces {
 				}
 			}
 		}
-		
 		return traces.iterator();
 	}
 
@@ -48,13 +47,13 @@ public class TreeTraces extends AbstractTraces {
 		for (int i=0;i<ssid.length();i++) {
 			curr = curr.hasBrotherNamed(ssid.charAt(i));
 			if (curr == null) {
-				System.out.println("No Such SSID " + ssid + "found");
+				System.out.println("No Such SSID " + ssid + " found");
 				return null;
 			}
 			if (i<ssid.length()-1) {
 				curr = curr.getFils();
 				if (curr == null) {
-					System.out.println("No Such SSID " + ssid + "found");
+					System.out.println("No Such SSID " + ssid + " found");
 					return null;
 				}
 			}

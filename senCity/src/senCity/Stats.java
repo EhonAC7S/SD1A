@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class Stats {
 	protected String nomFichier;
 	protected String parametre;

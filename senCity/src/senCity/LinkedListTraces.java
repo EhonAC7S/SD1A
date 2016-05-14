@@ -1,10 +1,7 @@
 package senCity;
 
-
 import java.io.IOException;
-
-import java.util.LinkedList; //ligne dependant de la Structure choisie
-
+import java.util.LinkedList; 
 
 public class LinkedListTraces extends Traces {
 	public LinkedListTraces(){ 
@@ -13,7 +10,6 @@ public class LinkedListTraces extends Traces {
 	
 	public LinkedListTraces(LinkedList<Trace> traces){
 		this.list=traces;
-		
 	}
 	public void initialiser() {
 		this.list = new LinkedList<Trace>();

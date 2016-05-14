@@ -16,6 +16,10 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 	
 	public abstract Traces extract(String ssid);
 
+	public abstract int taille();
+	
+	public abstract void initialiser();
+
 	public String toString() {
 		String sb = ""; 
 		for(Trace elt : this){
@@ -43,10 +47,6 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 			e.printStackTrace();
 		}
 	}
-
-	public abstract int taille();
-	
-	public abstract void initialiser();
 
 	public void load(String tWifi, String tGPS, double taux) throws IOException {
 		this.initialiser();

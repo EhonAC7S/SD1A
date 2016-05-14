@@ -3,17 +3,14 @@ package senCity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class ArrayListTraces extends Traces {
 	
-
 	public ArrayListTraces(){ 
 		list = new ArrayList<Trace>(); 
 	}
 	
 	public ArrayListTraces(ArrayList<Trace> traces){ 
 		this.list=traces;
-		
 	}
 	
 	public void initialiser() {

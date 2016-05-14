@@ -1,10 +1,6 @@
 package senCity;
 
-
-
 import java.util.HashMap;
-
-
 
 public class HashMapTraces extends MapTraces {  
 	public void initialiser() {
