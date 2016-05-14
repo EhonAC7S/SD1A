@@ -46,7 +46,6 @@ public abstract class MapTraces extends AbstractTraces implements Iterable<Trace
 				t.ajouter(elt);
 			}
 		}
-		//ne marche pas, recherche d'une autre methode pour le parcours par trace dans une hashmap/map
 		return traces.iterator();
 		
 	}

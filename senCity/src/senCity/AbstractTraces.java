@@ -144,6 +144,7 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 		HashMapTraces traces = new HashMapTraces();
 		LinkedListTraces traces1 = new LinkedListTraces();
 		ArrayListTraces traces2 = new ArrayListTraces();
+		TreeTraces traces3 = new TreeTraces();
 		System.out.println(System.currentTimeMillis());
 		traces.load("capture_wifi.csv","capture_gps.csv",0.85);
 		System.out.println(System.currentTimeMillis());
@@ -154,37 +155,45 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 		System.out.println(System.currentTimeMillis());
 		traces1.load("capture_wifi.csv","capture_gps.csv",0.85);
 		System.out.println(System.currentTimeMillis());
-		traces1.extract("<hidden>");
+		traces1.extract("eduroam");
 		System.out.println(System.currentTimeMillis());
 		traces1.save("linkedlist");
 		System.out.println(System.currentTimeMillis());
 		traces2.load("capture_wifi.csv","capture_gps.csv",0.85);
 		System.out.println(System.currentTimeMillis());
-		traces2.extract("<hidden>");
+		traces2.extract("eduroam");
 		System.out.println(System.currentTimeMillis());
 		traces2.save("arraylist");
 		System.out.println(System.currentTimeMillis());
-		
+		traces3.load("capture_wifi.csv","capture_gps.csv",0.85);
+		System.out.println(System.currentTimeMillis());
+		traces3.extract("eduroam");
+		System.out.println(System.currentTimeMillis());
+		traces3.save("arraylist");
+		System.out.println(System.currentTimeMillis());
 	}
 	
 	//temps d'acces instantanné.
 
 	/*comparaison des resultats (Q7 TP4)
 
-1463088103715			//debut du programme
+1463234141701			//debut du programme
 0.8317958637107573		//premier load sur hashmap
-1463088104513			//798 millisecondes pour load sur hashmap
-1463088104513			//temps pour extract instantanné
-1463088104594			//temps pour save hashmap : 81 milli --on passe a 40 milli apres optimisation de l'iterator<Trace> pour map
+1463234142565			//864 millisecondes pour load sur hashmap
+1463234142565			//temps pour extract instantanné
+1463234142577			//12 milli temps pour save hashmap
 0.8317958637107573		//2eme load sur linkedlist 
-1463088104807			//213 milli pour load une linkedlist
-1463088104813			//6 milli pour l'extract
-1463088104831			//18 milli pour save
+1463234142968			//391 (213 avant) milli pour load une linkedlist		//augmentation inattendu du temps pour la linkedlist alors que le code n'a pas été changé
+1463234142978			//10 (6 avant) milli pour l'extract
+1463234143068			//90 (18 avant) milli pour save
 0.8317958637107573		//3eme load sur la arraylist
-1463088105023			//192 milli pour load
-1463088105025			//2 milli pour extract
-1463088105038			//13 sec pour save
-
+1463234143281			//213 (192) milli pour load
+1463234143284			//2;3 milli pour extract
+1463234143307			//23 sec pour save
+0.8317958637107573		//load sur TreeTraces
+1463234143517			//210 milli pour un load sur TreeTraces
+1463234143517			//extract instanné sur TreeTraces
+1463234143539			//22 milli pour save sur TreeTraces
 
 
 */

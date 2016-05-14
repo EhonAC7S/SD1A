@@ -1,7 +1,7 @@
 package senCity;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class Stats {
 			while(ligne!=null){
 				Scanner filtre= new Scanner(ligne);
 				filtre.useDelimiter(",");
-				
 				timestamp.add(filtre.next());
 				Address.add(filtre.next());
 				SSID.add(filtre.next());
@@ -60,9 +59,9 @@ public class Stats {
 				security.add(filtre.next());
 				groupCipher.add(filtre.next());
 				ligne=flot.readLine();
-				
+				filtre.close();
 			}
-
+			
 			flot.close();
 			
 		} catch (IOException e) {
