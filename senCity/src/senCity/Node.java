@@ -7,9 +7,9 @@ public class Node {
 	private Node fils;
 	private Node frere;
 	private Traces traces;
-
+	private String chemin;
+	
 	public Node() {
-		
 	}
 	
 	public Node(char let) {
@@ -31,6 +31,10 @@ public class Node {
 	public void setTraces(Traces traces) {
 		this.traces = traces;
 	}
+	
+	public void setChemin(String che) {
+		this.chemin=che;
+	}
 
 	public Character getLettre() {
 		return this.lettre;
@@ -46,6 +50,10 @@ public class Node {
 	
 	public Traces getTraces() {
 		return this.traces;
+	}
+	
+	public String getChemin() {
+		return this.chemin;
 	}
 	
 	public boolean hasBrother() {
@@ -100,15 +108,6 @@ public class Node {
 	}
 	
 	public int taille() {
-		/*int t1 = 0;
-		int t2 = 0;
-		if (this.hasBrother()) {
-			t1 = this.getFrere().taille();
-		}
-		if (this.getFils()!=null) {
-			t2 = this.getFils().taille();
-		}
-		return 1+t1+t2;*/
 		return this.getFamily().size();
 	}
 
@@ -126,5 +125,14 @@ public class Node {
 		return myFamily;
 	}
 	
-
+	public ArrayList<String> getSubSSID() {
+		ArrayList<String> listSubSSID = new ArrayList<String>();
+		ArrayList<Node> famille = this.getFamily();
+		for (Node finalNode : famille) {
+			if (finalNode.getChemin()!=null) {
+				listSubSSID.add(finalNode.getChemin());
+			}
+		}
+		return listSubSSID;
+	}
 }

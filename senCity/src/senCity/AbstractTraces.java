@@ -17,12 +17,17 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 	public abstract Traces extract(String ssid);
 
 	public String toString() {
-		//this.initialiser();
 		String sb = ""; 
-		for(Trace elt : this){ //puisque la Collection en permet pas d'acceder aux éléments par leurs indices comme les sous classes peuvent le faire (par get(Int i)), alorqs on parcourt la liste par element.
+		for(Trace elt : this){
 			sb = sb + elt.toString() + "/n"; 
 		}
 		return sb;
+	}
+	
+	public void printTrace() {
+		for (Trace elt : this) {
+			System.out.println(elt.toString());
+		}
 	}
 	
 	public void save(String File) throws IOException{
@@ -42,8 +47,6 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 	public abstract int taille();
 	
 	public abstract void initialiser();
-	
-	//public abstract String toString();
 
 	public void load(String tWifi, String tGPS, double taux) throws IOException {
 		this.initialiser();
@@ -70,30 +73,20 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 
 				wifiF.useDelimiter(",");
 				lue++;
-				// System.out.println(lue);
 				timestampWifi = wifiF.next();
-				// System.out.println(timestampWifi);
 				timestampWifi = timestampWifi.substring(0, 10);
 				timestampWifid = Double.parseDouble(timestampWifi);
-				// System.out.println(timestampWifid);
 				wifiF.next();
 				SSID = wifiF.next();
-				// System.out.println(SSID);
-				// System.out.println(wifiF.next());
-				// System.out.println(wifiF.next());
 				wifiF.next();
 				wifiF.next();
 				Signal = Integer.parseInt(wifiF.next());
-				// System.out.println(Signal);
 			}
 			if (!gpsReaded) {
 				gpsF.useDelimiter(",");
 				timestampGPS = gpsF.next();
-				// System.out.println(timestampGPS);
 				timestampGPS = timestampGPS.substring(0, 10);
 				timestampGPSd = Double.parseDouble(timestampGPS);
-
-				// System.out.println(timestampGPSd);
 				String lat = gpsF.next();
 				String longi = gpsF.next();
 				localisation = new GPS(lat, longi);
@@ -106,25 +99,21 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 					wifiF.nextLine();
 					wifiReaded = false;
 					gpsReaded = true;
-					// System.out.println(stocker);
 
 				} else {
 					wifiF.nextLine();
 					wifiReaded = false;
 					gpsReaded = true;
-					// System.out.println("2");
 				}
 			} else {
 				if (timestampWifid < timestampGPSd) {
 					wifiF.nextLine();
 					wifiReaded = false;
 					gpsReaded = true;
-					// System.out.println("3");
 				} else {
 					gpsF.nextLine();
 					wifiReaded = true;
 					gpsReaded = false;
-					// System.out.println("4");
 				}
 			}
 
@@ -150,7 +139,6 @@ public abstract class AbstractTraces implements Iterable<Trace> {
 		System.out.println(System.currentTimeMillis());
 		traces.extract("<hidden>");
 		System.out.println(System.currentTimeMillis());
-		//traces.toString();
 		traces.save("hashmap");
 		System.out.println(System.currentTimeMillis());
 		traces1.load("capture_wifi.csv","capture_gps.csv",0.85);

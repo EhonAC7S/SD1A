@@ -3,8 +3,6 @@ package senCity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-
 public class TreeTraces extends AbstractTraces {
 	public Node lettres;
 	
@@ -26,16 +24,9 @@ public class TreeTraces extends AbstractTraces {
 			curr.setTraces(new ArrayListTraces());
 		}
 		curr.getTraces().ajouter(elt);
+		curr.setChemin(SSID);
 	}
 	
-	
-	/*
-	public Iterator<Node> iterator1() {
-		ArrayList<Node> listNoeuds = this.lettres.getFamily();
-		return listNoeuds.iterator();
-	}*/
-	
-/**/
 	@Override
 	public Iterator<Trace> iterator() {
 		ArrayListTraces traces = new ArrayListTraces();
@@ -50,7 +41,7 @@ public class TreeTraces extends AbstractTraces {
 		
 		return traces.iterator();
 	}
-/**/
+
 	@Override
 	public Traces extract(String ssid) {
 		Node curr = this.lettres;
@@ -73,12 +64,21 @@ public class TreeTraces extends AbstractTraces {
 		}
 		return curr.getTraces();
 	}
+	
+	public Traces extractAll(ArrayList<String> listSSID) {
+		Traces tracesTot = new ArrayListTraces();
+		Traces tracesPartielles = new ArrayListTraces();
+		for (String SSID : listSSID) {
+			tracesPartielles = this.extract(SSID);
+			for (Trace elt : tracesPartielles) {
+				tracesTot.ajouter(elt);
+			}
+		}
+		return tracesTot;
+	}
 
 	@Override
 	public int taille() {
-		/*int t = 0;
-		t = lettres.taille();
-		return t;*/
 		return this.lettres.getFamily().size();
 	}
 
@@ -87,8 +87,24 @@ public class TreeTraces extends AbstractTraces {
 		lettres = new Node();
 	}
 	
-	
-	
-	
-
+	public Node cherche(String ssid) {
+		Node curr = this.lettres;
+		for (int i=0;i<ssid.length();i++) {
+			if (curr.hasBrotherNamed(ssid.charAt(i)) == null) {
+				return curr;
+			}
+			else {
+				curr = curr.hasBrotherNamed(ssid.charAt(i));
+			}
+			if (i<ssid.length()-1) {
+				if (curr.getFils() == null) {
+					return curr;
+				}
+				else {
+					curr = curr.getFils();
+				}
+			}
+		}
+		return curr;
+	}
 }

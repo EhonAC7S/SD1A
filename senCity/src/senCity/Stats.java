@@ -1,7 +1,6 @@
 package senCity;
 
 import java.io.BufferedReader;
-//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,12 +9,10 @@ import java.util.Scanner;
 
 
 public class Stats {
-	
 	protected String nomFichier;
 	protected String parametre;
 	protected String valeur1;
 	protected String valeur2;
-	
 	protected ArrayList<String> timestamp = new ArrayList<String>();
 	protected ArrayList<String> Address = new ArrayList<String>();
 	protected ArrayList<String> SSID= new ArrayList<String>();
@@ -41,11 +38,9 @@ public class Stats {
 	}
 	
 	public void remplir(){
-		 
 		try {
 			BufferedReader flot = new BufferedReader(new FileReader(nomFichier));
 			String ligne=flot.readLine();
-			
 			while(ligne!=null){
 				Scanner filtre= new Scanner(ligne);
 				filtre.useDelimiter(",");
@@ -61,9 +56,7 @@ public class Stats {
 				ligne=flot.readLine();
 				filtre.close();
 			}
-			
 			flot.close();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,14 +75,7 @@ public class Stats {
 		}
 	}
 	
-	
 	public ArrayList<String> getTimestampList() {
 		return timestamp;
 	}
-	
-	
-	
-	
-	
-	
 }

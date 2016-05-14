@@ -1,17 +1,17 @@
 package senCity;
 
 import java.io.IOException;
-import java.util.ArrayList; //ligne dependant de la Structure choisie
+import java.util.ArrayList;
 
 
-public class ArrayListTraces extends Traces { //ligne dependant de la Structure choisie
+public class ArrayListTraces extends Traces {
 	
 
-	public ArrayListTraces(){ //ligne dependant de la Structure choisie
-		list = new ArrayList<Trace>(); //ligne dependant de la Structure choisie
+	public ArrayListTraces(){ 
+		list = new ArrayList<Trace>(); 
 	}
 	
-	public ArrayListTraces(ArrayList<Trace> traces){ //ligne dependant de la Structure choisie
+	public ArrayListTraces(ArrayList<Trace> traces){ 
 		this.list=traces;
 		
 	}
@@ -30,62 +30,6 @@ public class ArrayListTraces extends Traces { //ligne dependant de la Structure 
 		}
 		return extracted;
 	}
-
-
-	/*
-	public void ajouter(Trace elt){
-		this.list.add(elt);
-	}
-
-	public int size(){
-		return list.size();
-	}
-
-	public void load(String File) throws IOException{
-		this.list = new ArrayList<Trace>(); //ligne dependant de la Structure choisie
-		BufferedReader flot = new BufferedReader(new FileReader(File)) ;
-		Scanner file = new Scanner(flot);
-		file.nextLine();
-		int Signal;
-		Trace trace;
-		while(file.hasNextLine()){
-			file.useDelimiter(",");
-			String timestamp = file.next();
-			file.next();
-			String SSID = file.next();
-			file.next();
-			file.next();
-			Signal = Integer.parseInt(file.next());
-			file.nextLine();
-			trace = new Trace(timestamp, SSID, Signal);
-			this.ajouter(trace);
-		}
-		file.close();
-
-	}
-
-	public String toString(){
-		String sb = ""; 
-		for(int i = 0; i < list.size() ; i++){
-			sb = sb + list.get(i).toString() + "/n"; 
-		}
-		return sb;
-	}
-
-	public void save(String File) throws IOException{
-		try {
-			BufferedWriter flot1 = new BufferedWriter(new FileWriter(File)) ;
-			for (int i = 0 ; i<list.size() ; i++){
-				flot1.write(list.get(i).toString());
-				flot1.newLine();
-			}
-			flot1.close() ;
-		}catch (IOException e) {
-			System.out.println("Erreur lors de la lecture");
-			e.printStackTrace();
-		}
-	}
-	*/
 	
 	public static void main(String[] args) throws IOException{
 /*		ArrayListTraces traces = new ArrayListTraces();  //ligne dependant de la Structure choisie

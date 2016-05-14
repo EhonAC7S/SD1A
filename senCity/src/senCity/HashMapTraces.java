@@ -6,9 +6,7 @@ import java.util.HashMap;
 
 
 
-public class HashMapTraces extends MapTraces {
-	//private HashMap<String, Traces> list;
-  
+public class HashMapTraces extends MapTraces {  
 	public void initialiser() {
 		this.list = new HashMap<String, Traces>();
 	}
@@ -18,7 +16,6 @@ public class HashMapTraces extends MapTraces {
 		this.list = new HashMap<String, Traces>();
 	}
 	
-	
 	public HashMapTraces(HashMap<String, Traces> hashmap) {
 		this.list = hashmap;
 	}
@@ -27,6 +24,4 @@ public class HashMapTraces extends MapTraces {
 		Traces extracted = this.list.get(ssid);
 		return extracted;
 	}
-
-
 }
