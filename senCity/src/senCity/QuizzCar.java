@@ -29,7 +29,7 @@ public class QuizzCar {
 		while (cont) {
 			do {
 			System.out.println("Souhaitez-vous une recherche direct d'un SSID ou une suggestion de SSID?");
-			System.out.println("'suggestion' ou 'recherche' : ");
+			System.out.println("'suggestion', 'recherche' : ");
 			choix = input.nextLine();
 			} while (!choix.equals("recherche") && !choix.equals("suggestion"));
 			if (choix.equals("recherche")) {
@@ -80,6 +80,7 @@ public class QuizzCar {
 		}
 		
 		input.close();
+		System.out.println("Fin du programme");
 		}
 		catch (IOException e) {
 			System.out.println("Erreur lors de la sasie/lecture");
