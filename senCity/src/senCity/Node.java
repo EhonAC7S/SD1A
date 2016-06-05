@@ -111,7 +111,7 @@ public class Node {
 		return this.getFamily().size();
 	}
 
-	public ArrayList<Node> getFamily() {
+	public ArrayList<Node> getFamily() { //renvoie la famille qui est la famille des freres et sa propre descendance
 		ArrayList<Node> brothersFamily = new ArrayList<Node>();
 		ArrayList<Node> myFamily = new ArrayList<Node>();
 		if (this.hasBrother()) {
@@ -125,9 +125,16 @@ public class Node {
 		return myFamily;
 	}
 	
+	public ArrayList<Node> getDescendance() {
+		ArrayList<Node> family =  this.getFils().getFamily();
+		family.add(this);
+		return family;
+	}
+	
+	
 	public ArrayList<String> getSubSSID() {
 		ArrayList<String> listSubSSID = new ArrayList<String>();
-		ArrayList<Node> famille = this.getFamily();
+		ArrayList<Node> famille = this.getDescendance();
 		for (Node finalNode : famille) {
 			if (finalNode.getChemin()!=null) {
 				listSubSSID.add(finalNode.getChemin());

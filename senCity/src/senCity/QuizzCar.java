@@ -46,9 +46,9 @@ public class QuizzCar {
 			}
 			if (choix.equals("suggestion")){
 				System.out.println("Veuillez entrer le SSID partiel d'un wifi");
-				System.out.println("SSID recherché : ");
+				System.out.println("SSID recherché ou préfixe : ");
 				ssid = input.nextLine();
-				noeudApprocher = donnees.cherche(ssid);
+				noeudApprocher = donnees.cherche(ssid); //on cherche un noeud precis, mais on s'arrete dès qu'on ne peut trouver le chemin
 				listSSIDSugg = noeudApprocher.getSubSSID();
 				if (listSSIDSugg.size()==0) {
 					System.out.println("Pas de suggestion");
