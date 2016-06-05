@@ -1,0 +1,19 @@
+initialiser un depot git: git init
+creer le depot git de ton projet: git clone url-de-ton-git
+creer le depot git sans avoir le gros repertoire:git remote url-de-ton-git
+
+recuper le contenu de ton depot: git pull
+
+ajouter tes mofification: git add -A
+			  git commit -m "intituler de ton commit"
+			  git push
+
+creer une nouvelle branche: git checkout -b nom-de-ta -branche  (sa creer ta branche a partir de la branche 
+
+changer de branche: git checkout branche-de-destination
+
+liste des branches: git branch (-a pour avoir les branche distante)
+
+merger des branche:on se place dans la branche x
+ 		   git merge y ->merger y dans x
+		   git push 
