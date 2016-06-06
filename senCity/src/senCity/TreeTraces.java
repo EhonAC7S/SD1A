@@ -10,6 +10,10 @@ public class TreeTraces extends AbstractTraces {
 		this.lettres = new Node();
 	}
 	
+	public Node getRoot() {
+		return this.lettres;
+	}
+	
 	@Override
 	public void ajouter(Trace elt) {
 		String SSID = elt.getSSID();

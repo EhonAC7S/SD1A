@@ -28,4 +28,13 @@ public class Trace {
 	public String toString(){
 		return ("(" + this.ts + ", " + this.SSID + ", " + this.signal + this.localisation.toString() + ")");
 	}
+	
+	public GPS getloc() {
+		return this.localisation;
+	}
+	
+	public int getSignal() {
+		return this.signal;
+	}
+	
 }
