@@ -3,12 +3,13 @@ package senCity;
 import java.util.ArrayList;
 
 public class GraphDesGPS {
+	public static final int ALPHA_NOTDEF = -999;
 	private ArrayList<SommetGraph> ensDesGPS;
 	private boolean[][] arcs;
 	private double[][] dist;
 	private String nom;
 	
-	public GraphDesGPS() { //on créé le graph vide
+	public GraphDesGPS() { //on crée le graph vide
 		this.ensDesGPS = new ArrayList<SommetGraph>();
 		this.arcs = new boolean[0][0];
 	}

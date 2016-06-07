@@ -3,7 +3,7 @@ package senCity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.HashMap;
+//import java.util.HashMap;
 
 public class senCity {
 
@@ -18,7 +18,7 @@ public class senCity {
 			System.out.println("Entrez le taux de perte entre 0 et 1 acceptable");
 			double taux = Double.parseDouble(input.nextLine());
 			TreeTraces donnees = new TreeTraces();
-			donnees.load(wifi, gps, 1.);
+			donnees.load(wifi, gps, taux);
 			System.out.println("Le nombre de SSID disponible est : " + donnees.getRoot().getSubSSIDv2().size());
 			ArrayList<SommetGraph> ensDesGPS = new ArrayList<SommetGraph>();
 			for (Trace elt : donnees) {
@@ -57,14 +57,14 @@ public class senCity {
 			for (String ssid : donneesRestrict.getRoot().getSubSSIDv2()) {
 				System.out.println("Le SSID : " + ssid + " a " + donneesRestrict.cherche(ssid).getTraces().taille() + " points de ressensement");
 			}
-			System.out.println("Chargement de la table des graphs...");
-			HashMap<String,GraphDesGPS> tableDesGraphParSSID = new HashMap<String,GraphDesGPS>();
-			ensDesGPS = new ArrayList<SommetGraph>();
+			//System.out.println("Chargement de la table des graphs...");
+			//HashMap<String,GraphDesGPS> tableDesGraphParSSID = new HashMap<String,GraphDesGPS>();
+			/*ensDesGPS = new ArrayList<SommetGraph>();
 			for (Trace elt : donneesRestrict) {
 				if (!ensDesGPS.contains(elt.getloc())) {
 					ensDesGPS.add(new SommetGraph(elt.getloc()));
 				}
-			}
+			}*//*
 			GraphDesGPS graphSSID = new GraphDesGPS(ensDesGPS,"Tout le reseau");
 			graphSSID.initaliser(distance);
 			tableDesGraphParSSID.put("Tout le reseau", graphSSID);
@@ -83,18 +83,38 @@ public class senCity {
 
 			}
 			System.out.println("Table des graphs créée");
+			*/
+			ensDesGPS = new ArrayList<SommetGraph>();
 			String choixssid;
+			System.out.println("Quel Graph de SSID ('Tout le reseau' pour avoir le graph complet): ");
+			choixssid = input.nextLine();
+			if (choixssid.equals("Tout le reseau")) {
+				for (Trace elt : donneesRestrict) {
+					if (!ensDesGPS.contains(elt.getloc())) {
+						ensDesGPS.add(new SommetGraph(elt.getloc()));
+					}
+				}
+			}
+			else {
+				for (Trace elt : donneesRestrict.cherche(choixssid).getTraces()) {
+					if (!ensDesGPS.contains(elt.getloc())) {
+						ensDesGPS.add(new SommetGraph(elt.getloc()));
+					}
+				}
+			}
+			GraphDesGPS graphdessid = new GraphDesGPS(ensDesGPS,choixssid);
+			graphdessid.initaliser(distance);
 			String sommetstr;
 			int sommet;
 			int sommet1;
-			System.out.println("Quel Graph de SSID ('Tout le reseau' pour avoir le graph complet): ");
-			choixssid = input.nextLine();
-			System.out.println("le nombre de sommets est : " + tableDesGraphParSSID.get(choixssid).taille());
+			//System.out.println("Quel Graph de SSID ('Tout le reseau' pour avoir le graph complet): ");
+			//choixssid = input.nextLine();
+			//System.out.println("le nombre de sommets est : " + tableDesGraphParSSID.get(choixssid).taille());
 			System.out.println("Quel sommet de départ : ");
 			sommetstr = input.nextLine();
 			sommet = Integer.parseInt(sommetstr);
 			//System.out.println(tableDesGraphParSSID.get(choixssid).taille());
-			int[] listdespredecesseurs = Dijkstra.dijkstra(tableDesGraphParSSID.get(choixssid),sommet);
+			int[] listdespredecesseurs = Dijkstra.dijkstra(graphdessid,sommet);
 			if (!(listdespredecesseurs.length == 1)) {
 				System.out.println("Quel sommet d'arrivée : ");
 				sommetstr = input.nextLine();

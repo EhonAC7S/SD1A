@@ -15,10 +15,6 @@ public class Dijkstra {
 		dist[s] = 0.;
 		for (int i = 0; i < dist.length; i++) {
 			final int next = minVertex(dist, visited);
-			if (next==-1) {
-				return pred;
-			}
-			
 			visited[next] = true;
 			// The shortest path to next is dist[next] and via pred[next].
 			final int[] n = G.neighbors(next); // les voisins (les sommets
@@ -32,7 +28,9 @@ public class Dijkstra {
 				}
 			}
 		}
-		return pred; // (ignore pred[s]==0!)
+		System.out.println(pred);
+		return pred;
+		// (ignore pred[s]==0!)
 	}
 
 	private static int minVertex(double[] dist, boolean[] v) {
@@ -47,17 +45,20 @@ public class Dijkstra {
 		return y;
 	}
 
-	public static void printPath(int[] pred, int s, int e) {
+	public static void printPath(int[] pred, int ent, int fin) {
 		final ArrayList<Integer> path = new ArrayList<Integer>();
-		int x = e;
-		while (x != s) {
+		int x = fin;
+		while (x != ent) {
 			path.add(0, x);
 			x = pred[x];
+			//System.out.println(path);
 		}
-		path.add(0, s);
-		System.out.println(path);
-
+		if (x==ent){
+			path.add(0, ent);
+			System.out.println(path);
+		}		
 	}
+	
 	public static void main(String[] args) {
 		ArrayList<SommetGraph> gps = new ArrayList<SommetGraph>();
 		for (int i=0;i<3;i++){

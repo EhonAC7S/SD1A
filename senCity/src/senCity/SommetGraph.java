@@ -37,7 +37,6 @@ public class SommetGraph {
 		double abs2 = Double.parseDouble(this.getLocalisation().getLatitude());
 		double ord1 = Double.parseDouble(s1.getLocalisation().getLongitude());
 		double ord2 = Double.parseDouble(this.getLocalisation().getLongitude());
-		//double distance = 7.5*1000*Math.sqrt(Math.pow(Math.abs(abs1-abs2), 2)+Math.pow(Math.abs(ord1-ord2), 2));
 		return distance(abs1,ord1,abs2,ord2);
 	}
 	
