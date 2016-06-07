@@ -18,7 +18,7 @@ public class senCity {
 			System.out.println("Entrez le taux de perte entre 0 et 1 acceptable");
 			double taux = Double.parseDouble(input.nextLine());
 			TreeTraces donnees = new TreeTraces();
-			donnees.load(wifi, gps, taux);
+			donnees.load(wifi, gps, 1.);
 			System.out.println("Le nombre de SSID disponible est : " + donnees.getRoot().getSubSSIDv2().size());
 			ArrayList<SommetGraph> ensDesGPS = new ArrayList<SommetGraph>();
 			for (Trace elt : donnees) {
@@ -57,6 +57,7 @@ public class senCity {
 			for (String ssid : donneesRestrict.getRoot().getSubSSIDv2()) {
 				System.out.println("Le SSID : " + ssid + " a " + donneesRestrict.cherche(ssid).getTraces().taille() + " points de ressensement");
 			}
+			System.out.println("Chargement de la table des graphs...");
 			HashMap<String,GraphDesGPS> tableDesGraphParSSID = new HashMap<String,GraphDesGPS>();
 			ensDesGPS = new ArrayList<SommetGraph>();
 			for (Trace elt : donneesRestrict) {
@@ -70,28 +71,37 @@ public class senCity {
 			for (String ssid : donneesRestrict.getRoot().getSubSSIDv2()) {
 				ArrayList<SommetGraph> pointGPSSSID = new ArrayList<SommetGraph>();
 				for (Trace elt : donneesRestrict.cherche(ssid).getTraces()) {
-					if (!ensDesGPS.contains(elt.getloc())) {
-						ensDesGPS.add(new SommetGraph(elt.getloc()));
+					if (!pointGPSSSID.contains(elt.getloc())) {
+						pointGPSSSID.add(new SommetGraph(elt.getloc()));
 					}
-				}				
+				}
+				//System.out.println(pointGPSSSID.size());
 				GraphDesGPS graphdessid = new GraphDesGPS(pointGPSSSID,ssid);
 				graphdessid.initaliser(distance);
 				tableDesGraphParSSID.put(ssid, graphdessid);
+				//System.out.println("le nombre de sommets est : " + tableDesGraphParSSID.get(ssid).taille() + " pour " + ssid);
+
 			}
 			System.out.println("Table des graphs créée");
 			String choixssid;
 			String sommetstr;
 			int sommet;
-			System.out.println("Quel Graph de SSID : ");
+			int sommet1;
+			System.out.println("Quel Graph de SSID ('Tout le reseau' pour avoir le graph complet): ");
 			choixssid = input.nextLine();
+			System.out.println("le nombre de sommets est : " + tableDesGraphParSSID.get(choixssid).taille());
 			System.out.println("Quel sommet de départ : ");
 			sommetstr = input.nextLine();
 			sommet = Integer.parseInt(sommetstr);
-			Dijkstra.dijkstra(tableDesGraphParSSID.get(choixssid),sommet);
-			/*System.out.println("Quel sommet d'arrivée : ");
-			sommetstr = input.nextLine();
-			sommet = Integer.parseInt(sommetstr);
-			*/
+			//System.out.println(tableDesGraphParSSID.get(choixssid).taille());
+			int[] listdespredecesseurs = Dijkstra.dijkstra(tableDesGraphParSSID.get(choixssid),sommet);
+			if (!(listdespredecesseurs.length == 1)) {
+				System.out.println("Quel sommet d'arrivée : ");
+				sommetstr = input.nextLine();
+				sommet1 = Integer.parseInt(sommetstr);
+				Dijkstra.printPath(listdespredecesseurs, sommet, sommet1);
+			}
+			
 			input.close();
 			System.out.println("Fin du programme");
 		} catch (IOException e) {
@@ -99,5 +109,4 @@ public class senCity {
 			e.printStackTrace();
 		}
 	}
-
 }

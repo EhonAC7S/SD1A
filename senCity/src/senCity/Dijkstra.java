@@ -6,18 +6,20 @@ public class Dijkstra {
 	// Dijkstra's algorithm to find shortest path from s to all other nodes
 	public static int[] dijkstra(GraphDesGPS G, int s) {
 		final double[] dist = new double[G.taille()]; // shortest known distance
-		System.out.println(dist.length);										// from "s"
-		final int[] pred = new int[G.taille()]; // preceeding node in path
+		final int[] pred = new int[G.taille()]; 
 		final boolean[] visited = new boolean[G.taille()]; // all false
-		System.out.println("1");										// initially
+									
 		for (int i = 0; i < dist.length; i++) {
 			dist[i] = Double.MAX_VALUE;
 		}
 		dist[s] = 0.;
 		for (int i = 0; i < dist.length; i++) {
 			final int next = minVertex(dist, visited);
+			if (next==-1) {
+				return pred;
+			}
+			
 			visited[next] = true;
-			System.out.println("2");
 			// The shortest path to next is dist[next] and via pred[next].
 			final int[] n = G.neighbors(next); // les voisins (les sommets
 												// touchés)
@@ -37,7 +39,6 @@ public class Dijkstra {
 		double x = Double.MAX_VALUE;
 		int y = -1; // graph not connected, or no unvisited vertices
 		for (int i = 0; i < dist.length; i++) {
-			System.out.println("3");
 			if (!v[i] && dist[i] < x) {
 				y = i;
 				x = dist[i];
@@ -46,7 +47,7 @@ public class Dijkstra {
 		return y;
 	}
 
-	public static void printPath(GraphDesGPS G, int[] pred, int s, int e) {
+	public static void printPath(int[] pred, int s, int e) {
 		final ArrayList<Integer> path = new ArrayList<Integer>();
 		int x = e;
 		while (x != s) {
@@ -65,6 +66,6 @@ public class Dijkstra {
 		}
 		GraphDesGPS graph = new GraphDesGPS(gps,"test");
 		graph.initaliser(1.5);
-		Dijkstra.dijkstra(graph, 1);
+		Dijkstra.printPath(Dijkstra.dijkstra(graph, 0), 0, 2);
 	}
 }
